@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.1.10.6082533
-Release  : 1
+Release  : 2
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Summary  : Library for unpacking and executing VMware Guest Customization package.
@@ -85,6 +85,14 @@ Group: Documentation
 doc components for the open-vm-tools package.
 
 
+%package extras
+Summary: extras components for the open-vm-tools package.
+Group: Default
+
+%description extras
+extras components for the open-vm-tools package.
+
+
 %package lib
 Summary: lib components for the open-vm-tools package.
 Group: Libraries
@@ -104,7 +112,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506476497
+export SOURCE_DATE_EPOCH=1506482440
 %configure --disable-static --without-xerces-c \
 --without-xerces \
 --without-gtkmm \
@@ -122,7 +130,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1506476497
+export SOURCE_DATE_EPOCH=1506482440
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
@@ -184,8 +192,15 @@ rm %{buildroot}/sbin/mount.vmhgfs
 %defattr(-,root,root,-)
 %doc /usr/share/doc/open\-vm\-tools/*
 
+%files extras
+%defattr(-,root,root,-)
+/usr/lib64/open-vm-tools/plugins/vmusr/libdesktopEvents.so
+/usr/lib64/open-vm-tools/plugins/vmusr/libresolutionSet.so
+
 %files lib
 %defattr(-,root,root,-)
+%exclude /usr/lib64/open-vm-tools/plugins/vmusr/libdesktopEvents.so
+%exclude /usr/lib64/open-vm-tools/plugins/vmusr/libresolutionSet.so
 /usr/lib64/libDeployPkg.so.0
 /usr/lib64/libDeployPkg.so.0.0.0
 /usr/lib64/libguestlib.so.0
@@ -202,5 +217,3 @@ rm %{buildroot}/sbin/mount.vmhgfs
 /usr/lib64/open-vm-tools/plugins/vmsvc/libpowerOps.so
 /usr/lib64/open-vm-tools/plugins/vmsvc/libtimeSync.so
 /usr/lib64/open-vm-tools/plugins/vmsvc/libvmbackup.so
-/usr/lib64/open-vm-tools/plugins/vmusr/libdesktopEvents.so
-/usr/lib64/open-vm-tools/plugins/vmusr/libresolutionSet.so
