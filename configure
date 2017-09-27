@@ -1,0 +1,9 @@
+--without-xerces-c
+--without-xerces
+--without-gtkmm
+--without-dnet
+--without-gtkmm3
+--without-gtk2
+--with-gtk3
+
+
