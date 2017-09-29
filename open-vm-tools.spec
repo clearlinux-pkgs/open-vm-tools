@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.1.10.6082533
-Release  : 3
+Release  : 4
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source1  : open-vm-tools.service
@@ -12,6 +12,7 @@ Summary  : Library for unpacking and executing VMware Guest Customization packag
 Group    : Development/Tools
 License  : BSD-2-Clause CDDL-1.0 GPL-2.0 LGPL-2.1
 Requires: open-vm-tools-bin
+Requires: open-vm-tools-autostart
 Requires: open-vm-tools-config
 Requires: open-vm-tools-lib
 Requires: open-vm-tools-doc
@@ -39,6 +40,14 @@ open-vm-tools <https://github.com/vmware/open-vm-tools>
 These are the release notes for the open-vm-tools.  Read them carefully, as
 they explain how to build this project for different platforms and various
 different Linux distributions.
+
+%package autostart
+Summary: autostart components for the open-vm-tools package.
+Group: Default
+
+%description autostart
+autostart components for the open-vm-tools package.
+
 
 %package bin
 Summary: bin components for the open-vm-tools package.
@@ -113,7 +122,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506648003
+export SOURCE_DATE_EPOCH=1506648201
 %configure --disable-static --without-xerces-c \
 --without-xerces \
 --without-gtkmm \
@@ -131,17 +140,23 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1506648003
+export SOURCE_DATE_EPOCH=1506648201
 rm -rf %{buildroot}
 %make_install
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/open-vm-tools.service
 ## make_install_append content
 rm %{buildroot}/sbin/mount.vmhgfs
+mkdir -p %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
+ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
 ## make_install_append end
 
 %files
 %defattr(-,root,root,-)
+
+%files autostart
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/multi-user.target.wants/open-vm-tools.service
 
 %files bin
 %defattr(-,root,root,-)
@@ -158,6 +173,7 @@ rm %{buildroot}/sbin/mount.vmhgfs
 
 %files config
 %defattr(-,root,root,-)
+%exclude /usr/lib/systemd/system/multi-user.target.wants/open-vm-tools.service
 /usr/lib/systemd/system/open-vm-tools.service
 /usr/lib/udev/rules.d/99-vmware-scsi-udev.rules
 
