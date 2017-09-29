@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.1.10.6082533
-Release  : 5
+Release  : 8
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source1  : open-vm-tools.service
@@ -16,8 +16,8 @@ Requires: open-vm-tools-bin
 Requires: open-vm-tools-autostart
 Requires: open-vm-tools-config
 Requires: open-vm-tools-lib
-Requires: open-vm-tools-doc
 Requires: open-vm-tools-data
+Requires: open-vm-tools-doc
 BuildRequires : Linux-PAM-dev
 BuildRequires : doxygen
 BuildRequires : glib-dev
@@ -123,14 +123,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506682618
+export SOURCE_DATE_EPOCH=1506683256
 %configure --disable-static --without-xerces-c \
 --without-xerces \
 --without-gtkmm \
 --without-dnet \
 --without-gtkmm3 \
 --without-gtk2 \
---with-gtk3
+--with-gtk3 \
+--with-pam-prefix=/usr/share \
+--sysconfdir=/usr/share/defaults/open-vm-tools
 make V=1  %{?_smp_mflags}
 
 %check
@@ -141,7 +143,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1506682618
+export SOURCE_DATE_EPOCH=1506683256
 rm -rf %{buildroot}
 %make_install
 mkdir -p %{buildroot}/usr/lib/systemd/system
@@ -151,6 +153,7 @@ install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/vgauthd.service
 rm %{buildroot}/sbin/mount.vmhgfs
 mkdir -p %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
 ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
+mv %{buildroot}/etc/* %{buildroot}/usr/share/defaults/open-vm-tools/
 ## make_install_append end
 
 %files
@@ -182,6 +185,15 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/defaults/open-vm-tools/vmware-tools/guestproxy-ssl.conf
+/usr/share/defaults/open-vm-tools/vmware-tools/poweroff-vm-default
+/usr/share/defaults/open-vm-tools/vmware-tools/poweron-vm-default
+/usr/share/defaults/open-vm-tools/vmware-tools/resume-vm-default
+/usr/share/defaults/open-vm-tools/vmware-tools/scripts/vmware/network
+/usr/share/defaults/open-vm-tools/vmware-tools/statechange.subr
+/usr/share/defaults/open-vm-tools/vmware-tools/suspend-vm-default
+/usr/share/defaults/open-vm-tools/vmware-tools/vm-support
+/usr/share/defaults/open-vm-tools/xdg/autostart/vmware-user.desktop
 /usr/share/open-vm-tools/messages/de/toolboxcmd.vmsg
 /usr/share/open-vm-tools/messages/de/vmtoolsd.vmsg
 /usr/share/open-vm-tools/messages/ja/toolboxcmd.vmsg
@@ -189,6 +201,7 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 /usr/share/open-vm-tools/messages/ko/toolboxcmd.vmsg
 /usr/share/open-vm-tools/messages/ko/vmtoolsd.vmsg
 /usr/share/open-vm-tools/messages/zh_CN/toolboxcmd.vmsg
+/usr/share/pam.d/vmtoolsd
 
 %files dev
 %defattr(-,root,root,-)

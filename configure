@@ -5,5 +5,7 @@
 --without-gtkmm3
 --without-gtk2
 --with-gtk3
+--with-pam-prefix=/usr/share
+--sysconfdir=/usr/share/defaults/open-vm-tools
 
 
