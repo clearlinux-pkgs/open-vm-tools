@@ -1,0 +1,9 @@
+[Unit]
+Description=Service for open-vm-tools
+ConditionVirtualization=vmware
+
+[Service]
+ExecStart=/usr/bin/vmtoolsd
+
+[Install]
+WantedBy=multi-user.target
