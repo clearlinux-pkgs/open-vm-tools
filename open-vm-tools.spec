@@ -4,10 +4,11 @@
 #
 Name     : open-vm-tools
 Version  : 10.1.10.6082533
-Release  : 4
+Release  : 5
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source1  : open-vm-tools.service
+Source2  : vgauthd.service
 Summary  : Library for unpacking and executing VMware Guest Customization package.
 Group    : Development/Tools
 License  : BSD-2-Clause CDDL-1.0 GPL-2.0 LGPL-2.1
@@ -122,7 +123,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506648201
+export SOURCE_DATE_EPOCH=1506682618
 %configure --disable-static --without-xerces-c \
 --without-xerces \
 --without-gtkmm \
@@ -140,11 +141,12 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1506648201
+export SOURCE_DATE_EPOCH=1506682618
 rm -rf %{buildroot}
 %make_install
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/open-vm-tools.service
+install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/vgauthd.service
 ## make_install_append content
 rm %{buildroot}/sbin/mount.vmhgfs
 mkdir -p %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
@@ -175,6 +177,7 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 %defattr(-,root,root,-)
 %exclude /usr/lib/systemd/system/multi-user.target.wants/open-vm-tools.service
 /usr/lib/systemd/system/open-vm-tools.service
+/usr/lib/systemd/system/vgauthd.service
 /usr/lib/udev/rules.d/99-vmware-scsi-udev.rules
 
 %files data
