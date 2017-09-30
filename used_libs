@@ -24,6 +24,7 @@ libgmodule-2.0.so.0
 libgobject-2.0.so.0
 libgthread-2.0.so.0
 libgtk-3.so.0
+libicudata.so.55
 libicui18n.so.55
 libicuuc.so.55
 libmspack.so.0
@@ -31,4 +32,5 @@ libpango-1.0.so.0
 libpangocairo-1.0.so.0
 libprocps.so.6
 libpthread.so.0
+librt.so.1
 libssl.so.1.0.0

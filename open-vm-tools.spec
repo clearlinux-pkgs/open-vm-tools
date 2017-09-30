@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.1.10.6082533
-Release  : 8
+Release  : 9
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source1  : open-vm-tools.service
@@ -19,14 +19,21 @@ Requires: open-vm-tools-lib
 Requires: open-vm-tools-data
 Requires: open-vm-tools-doc
 BuildRequires : Linux-PAM-dev
+BuildRequires : automake
+BuildRequires : automake-dev
 BuildRequires : doxygen
+BuildRequires : gettext-bin
 BuildRequires : glib-dev
 BuildRequires : graphviz
 BuildRequires : gtk3-dev
 BuildRequires : libSM-dev
 BuildRequires : libXext-dev
 BuildRequires : libmspack-dev
+BuildRequires : libtool
+BuildRequires : libtool-dev
+BuildRequires : m4
 BuildRequires : openssl-dev
+BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(ice)
 BuildRequires : pkgconfig(udev)
 BuildRequires : pkgconfig(x11)
@@ -34,6 +41,7 @@ BuildRequires : pkgconfig(xtst)
 BuildRequires : procps-ng-dev
 BuildRequires : sed
 Patch1: build.patch
+Patch2: stateless.patch
 
 %description
 Project information:
@@ -117,14 +125,15 @@ lib components for the open-vm-tools package.
 %prep
 %setup -q -n open-vm-tools-10.1.10-6082533
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506683256
-%configure --disable-static --without-xerces-c \
+export SOURCE_DATE_EPOCH=1506786705
+%reconfigure --disable-static --without-xerces-c \
 --without-xerces \
 --without-gtkmm \
 --without-dnet \
@@ -143,7 +152,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1506683256
+export SOURCE_DATE_EPOCH=1506786705
 rm -rf %{buildroot}
 %make_install
 mkdir -p %{buildroot}/usr/lib/systemd/system
@@ -153,7 +162,6 @@ install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/vgauthd.service
 rm %{buildroot}/sbin/mount.vmhgfs
 mkdir -p %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
 ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
-mv %{buildroot}/etc/* %{buildroot}/usr/share/defaults/open-vm-tools/
 ## make_install_append end
 
 %files

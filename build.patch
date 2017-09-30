@@ -23,3 +23,13 @@
  
  # -Wno-unknown-pragmas is due to gcc not understanding '#pragma ident'
  # in Xlib.h on OpenSolaris.
+--- open-vm-tools-10.1.10-6082533/configure.ac~	2017-07-28 22:19:20.000000000 +0000
++++ open-vm-tools-10.1.10-6082533/configure.ac	2017-09-30 15:45:49.391963414 +0000
+@@ -1137,7 +1137,6 @@
+ 
+ ### General flags / actions
+ CFLAGS="$CFLAGS -Wall"
+-CFLAGS="$CFLAGS -Werror"
+ 
+ # -Wno-unknown-pragmas is due to gcc not understanding '#pragma ident'
+ # in Xlib.h on OpenSolaris.
