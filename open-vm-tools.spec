@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.1.10.6082533
-Release  : 9
+Release  : 11
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source1  : open-vm-tools.service
@@ -21,7 +21,9 @@ Requires: open-vm-tools-doc
 BuildRequires : Linux-PAM-dev
 BuildRequires : automake
 BuildRequires : automake-dev
+BuildRequires : compat-fuse-soname2-dev
 BuildRequires : doxygen
+BuildRequires : fuse-dev
 BuildRequires : gettext-bin
 BuildRequires : glib-dev
 BuildRequires : graphviz
@@ -40,6 +42,7 @@ BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xtst)
 BuildRequires : procps-ng-dev
 BuildRequires : sed
+BuildRequires : xmlsec1-dev
 Patch1: build.patch
 Patch2: stateless.patch
 
@@ -132,7 +135,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506786705
+export SOURCE_DATE_EPOCH=1506787707
 %reconfigure --disable-static --without-xerces-c \
 --without-xerces \
 --without-gtkmm \
@@ -141,7 +144,9 @@ export SOURCE_DATE_EPOCH=1506786705
 --without-gtk2 \
 --with-gtk3 \
 --with-pam-prefix=/usr/share \
---sysconfdir=/usr/share/defaults/open-vm-tools
+--sysconfdir=/usr/share/defaults/open-vm-tools \
+--enable-vgauth \
+--enable-caf
 make V=1  %{?_smp_mflags}
 
 %check
@@ -152,7 +157,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1506786705
+export SOURCE_DATE_EPOCH=1506787707
 rm -rf %{buildroot}
 %make_install
 mkdir -p %{buildroot}/usr/lib/systemd/system
@@ -174,6 +179,7 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/mount.vmhgfs
+/usr/bin/vmhgfs-fuse
 /usr/bin/vmtoolsd
 /usr/bin/vmware-checkvm
 /usr/bin/vmware-guestproxycerttool
@@ -182,6 +188,7 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 /usr/bin/vmware-rpctool
 /usr/bin/vmware-toolbox-cmd
 /usr/bin/vmware-user-suid-wrapper
+/usr/bin/vmware-vmblock-fuse
 /usr/bin/vmware-xferlogs
 
 %files config

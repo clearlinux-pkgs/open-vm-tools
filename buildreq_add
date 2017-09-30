@@ -10,3 +10,6 @@ libSM-dev
 procps-ng-dev
 doxygen
 graphviz
+fuse-dev
+compat-fuse-soname2-dev
+xmlsec1-dev

@@ -7,5 +7,5 @@
 --with-gtk3
 --with-pam-prefix=/usr/share
 --sysconfdir=/usr/share/defaults/open-vm-tools
-
-
+--enable-vgauth
+--enable-caf

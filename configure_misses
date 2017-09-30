@@ -1,4 +1,3 @@
-Configure miss: fuse (via pkg-config)
 Configure miss: BIO_new_file in -lssl
 Configure miss: CUnit/CUnit.h usability
 Configure miss: CUnit/CUnit.h presence
