@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.1.10.6082533
-Release  : 11
+Release  : 12
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.1.10/open-vm-tools-10.1.10-6082533.tar.gz
 Source1  : open-vm-tools.service
@@ -45,6 +45,7 @@ BuildRequires : sed
 BuildRequires : xmlsec1-dev
 Patch1: build.patch
 Patch2: stateless.patch
+Patch3: wakeups.patch
 
 %description
 Project information:
@@ -129,13 +130,14 @@ lib components for the open-vm-tools package.
 %setup -q -n open-vm-tools-10.1.10-6082533
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506787707
+export SOURCE_DATE_EPOCH=1506791416
 %reconfigure --disable-static --without-xerces-c \
 --without-xerces \
 --without-gtkmm \
@@ -157,7 +159,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1506787707
+export SOURCE_DATE_EPOCH=1506791416
 rm -rf %{buildroot}
 %make_install
 mkdir -p %{buildroot}/usr/lib/systemd/system

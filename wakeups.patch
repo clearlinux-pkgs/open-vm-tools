@@ -1,0 +1,22 @@
+--- open-vm-tools-10.1.10-6082533/lib/poll/poll.c~	2017-07-28 22:19:20.000000000 +0000
++++ open-vm-tools-10.1.10-6082533/lib/poll/poll.c	2017-09-30 16:29:18.647229232 +0000
+@@ -49,7 +49,7 @@
+  * POLL_MAIN_LOOP events are fired.  --hpreg
+  */
+ 
+-#define MAX_SLEEP_TIME (1 * 1000 * 1000) /* 1 s. */
++#define MAX_SLEEP_TIME (30 * 1000 * 1000) /* 1 s. */
+ 
+ 
+ static const PollImpl *pollImpl = NULL;
+--- open-vm-tools-10.1.10-6082533/lib/rpcChannel/rpcChannelInt.h~	2017-07-28 22:19:20.000000000 +0000
++++ open-vm-tools-10.1.10-6082533/lib/rpcChannel/rpcChannelInt.h	2017-09-30 17:03:52.224206380 +0000
+@@ -28,7 +28,7 @@
+ #include "vmware/tools/guestrpc.h"
+ 
+ /** Max amount of time (in .01s) that the RpcIn loop will sleep for. */
+-#define RPCIN_MAX_DELAY    10
++#define RPCIN_MAX_DELAY    400
+ 
+ struct RpcIn;
+ 
