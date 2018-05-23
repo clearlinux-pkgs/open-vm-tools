@@ -15,6 +15,7 @@ libcairo.so.2
 libcrypt.so.1
 libcrypto.so.1.0.0
 libdl.so.2
+libfribidi.so.0
 libfuse.so.2
 libgcc_s.so.1
 libgdk-3.so.0
@@ -31,7 +32,7 @@ libicuuc.so.61
 libmspack.so.0
 libpango-1.0.so.0
 libpangocairo-1.0.so.0
-libprocps.so.6
+libprocps.so.7
 libpthread.so.0
 librt.so.1
 libssl.so.1.0.0

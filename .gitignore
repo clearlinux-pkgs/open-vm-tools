@@ -1,0 +1,10 @@
+.*~
+*~
+*.swp
+.repo-index
+*.log*
+*.tar*
+*.tgz
+*.zip
+commitmsg
+results/

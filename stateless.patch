@@ -5,7 +5,7 @@
  #   define GUESTAPP_TOOLS_INSTALL_PATH "/Library/Application Support/VMware Tools"
  #else
 -#   define GUESTAPP_TOOLS_INSTALL_PATH "/etc/vmware-tools"
-+#   define GUESTAPP_TOOLS_INSTALL_PATH "/usr/share/defaults/open-vm-tools/vmware-tools/vmware-tools"
++#   define GUESTAPP_TOOLS_INSTALL_PATH "/usr/share/defaults/open-vm-tools/vmware-tools"
  #endif
  
  #if defined _WIN32
