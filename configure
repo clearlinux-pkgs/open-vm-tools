@@ -1,5 +1,3 @@
---without-xerces-c
---without-xerces
 --without-gtkmm
 --without-dnet
 --without-gtkmm3
@@ -7,5 +5,7 @@
 --with-gtk3
 --with-pam-prefix=/usr/share
 --sysconfdir=/usr/share/defaults/open-vm-tools
---enable-vgauth
---enable-caf
+--without-xerces
+--disable-vgauth
+--disable-caf
+--disable-glibc-check

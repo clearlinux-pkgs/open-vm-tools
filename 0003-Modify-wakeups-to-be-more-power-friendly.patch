@@ -1,0 +1,39 @@
+From cf09c3be9ee2d1ec02fdd4c8f058862c11a5b966 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Thu, 26 Jul 2018 18:36:17 +0000
+Subject: [PATCH 3/3] Modify wakeups to be more power friendly
+
+---
+ lib/poll/poll.c                | 2 +-
+ lib/rpcChannel/rpcChannelInt.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lib/poll/poll.c b/lib/poll/poll.c
+index 374396e..9693f26 100644
+--- a/lib/poll/poll.c
++++ b/lib/poll/poll.c
+@@ -50,7 +50,7 @@
+  * POLL_MAIN_LOOP events are fired.  --hpreg
+  */
+ 
+-#define MAX_SLEEP_TIME (1 * 1000 * 1000) /* 1 s. */
++#define MAX_SLEEP_TIME (30 * 1000 * 1000) /* 1 s. */
+ 
+ 
+ static const PollImpl *pollImpl = NULL;
+diff --git a/lib/rpcChannel/rpcChannelInt.h b/lib/rpcChannel/rpcChannelInt.h
+index 7d2d2a5..ecb9adf 100644
+--- a/lib/rpcChannel/rpcChannelInt.h
++++ b/lib/rpcChannel/rpcChannelInt.h
+@@ -36,7 +36,7 @@
+ #define NEED_RPCIN
+ 
+ /** Max amount of time (in .01s) that the RpcIn loop will sleep for. */
+-#define RPCIN_MAX_DELAY    10
++#define RPCIN_MAX_DELAY    400
+ 
+ struct RpcIn;
+ #endif
+-- 
+2.18.0
+

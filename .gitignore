@@ -2,9 +2,11 @@
 *~
 *.swp
 .repo-index
-*.log*
-*.tar*
+*.log
+build.log.round*
+*.tar.*
 *.tgz
+!*.tar.*.*
 *.zip
 commitmsg
 results/
