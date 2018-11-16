@@ -13,7 +13,7 @@ libc.so.6
 libcairo-gobject.so.2
 libcairo.so.2
 libcrypt.so.1
-libcrypto.so.1.0.0
+libcrypto.so.1.1
 libdl.so.2
 libdrm.so.2
 libfuse.so.2
@@ -26,13 +26,13 @@ libgmodule-2.0.so.0
 libgobject-2.0.so.0
 libgthread-2.0.so.0
 libgtk-3.so.0
-libicudata.so.61
-libicui18n.so.61
-libicuuc.so.61
+libicudata.so.63
+libicui18n.so.63
+libicuuc.so.63
 libmspack.so.0
 libpango-1.0.so.0
 libpangocairo-1.0.so.0
 libpthread.so.0
 librt.so.1
-libssl.so.1.0.0
+libssl.so.1.1
 libudev.so.1
