@@ -8,7 +8,6 @@ function.
 ---
  configure                  | 1 -
  configure.ac               | 1 -
- lib/nicInfo/nicInfoPosix.c | 6 +++++-
  3 files changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/configure b/configure
@@ -35,23 +34,6 @@ index 72dc4ff..4beb71f 100644
  
  # Suppress warnings from clang when taking the address of packed struct
  # member fields when compiling hgfsServer.c
-diff --git a/lib/nicInfo/nicInfoPosix.c b/lib/nicInfo/nicInfoPosix.c
-index 8a063a0..1d71568 100644
---- a/lib/nicInfo/nicInfoPosix.c
-+++ b/lib/nicInfo/nicInfoPosix.c
-@@ -526,7 +526,11 @@ GuestInfoGetPrimaryIP(void)
-    return ipp.ipstr;
- }
- #else
--#   error GuestInfoGetPrimaryIP needed for this platform
-+char *
-+GuestInfoGetPrimaryIP(void)
-+{
-+   return strdup("127.0.0.1");
-+}
- #endif
- #endif
- 
 -- 
 2.18.0
 
