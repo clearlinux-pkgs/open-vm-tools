@@ -4,6 +4,7 @@ ConditionVirtualization=vmware
 
 [Service]
 ExecStart=/usr/bin/vmtoolsd
+ExecStartPre=/usr/bin/modprobe fuse
 
 [Install]
 WantedBy=multi-user.target
