@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.3.5
-Release  : 24
+Release  : 25
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.3.5/open-vm-tools-10.3.5-10430147.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.3.5/open-vm-tools-10.3.5-10430147.tar.gz
 Source1  : open-vm-tools.service
@@ -156,7 +156,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546267775
+export SOURCE_DATE_EPOCH=1546268181
 %reconfigure --disable-static --without-gtkmm \
 --without-dnet \
 --without-gtkmm3 \
@@ -178,7 +178,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1546267775
+export SOURCE_DATE_EPOCH=1546268181
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/open-vm-tools
 cp COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/COPYING
