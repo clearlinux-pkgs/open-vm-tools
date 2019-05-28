@@ -1,6 +1,4 @@
---without-gtkmm
 --without-dnet
---without-gtkmm3
 --without-gtk2
 --with-gtk3
 --with-pam-prefix=/usr/share

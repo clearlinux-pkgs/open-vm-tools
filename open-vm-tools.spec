@@ -4,10 +4,11 @@
 #
 Name     : open-vm-tools
 Version  : 10.3.5
-Release  : 26
+Release  : 28
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.3.5/open-vm-tools-10.3.5-10430147.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.3.5/open-vm-tools-10.3.5-10430147.tar.gz
 Source1  : open-vm-tools.service
+Source2  : vmware-vmblock-fuse.service
 Summary  : Library for unpacking and executing VMware Guest Customization package.
 Group    : Development/Tools
 License  : BSD-2-Clause CDDL-1.0 GPL-2.0 LGPL-2.1 MIT
@@ -24,6 +25,7 @@ BuildRequires : automake
 BuildRequires : automake-dev
 BuildRequires : compat-fuse-soname2-dev
 BuildRequires : doxygen
+BuildRequires : fuse
 BuildRequires : fuse-dev
 BuildRequires : gettext-bin
 BuildRequires : glib-dev
@@ -37,6 +39,7 @@ BuildRequires : libtool-dev
 BuildRequires : m4
 BuildRequires : openssl-dev
 BuildRequires : pkg-config-dev
+BuildRequires : pkgconfig(gtkmm-3.0)
 BuildRequires : pkgconfig(ice)
 BuildRequires : pkgconfig(libdrm)
 BuildRequires : pkgconfig(libtirpc)
@@ -98,6 +101,7 @@ Requires: open-vm-tools-lib = %{version}-%{release}
 Requires: open-vm-tools-bin = %{version}-%{release}
 Requires: open-vm-tools-data = %{version}-%{release}
 Provides: open-vm-tools-devel = %{version}-%{release}
+Requires: open-vm-tools = %{version}-%{release}
 
 %description dev
 dev components for the open-vm-tools package.
@@ -156,10 +160,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546268181
-%reconfigure --disable-static --without-gtkmm \
---without-dnet \
---without-gtkmm3 \
+export SOURCE_DATE_EPOCH=1559065312
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+%reconfigure --disable-static --without-dnet \
 --without-gtk2 \
 --with-gtk3 \
 --with-pam-prefix=/usr/share \
@@ -178,7 +185,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1546268181
+export SOURCE_DATE_EPOCH=1559065312
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/open-vm-tools
 cp COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/COPYING
@@ -230,10 +237,14 @@ cp xferlogs/COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/xferlo
 %make_install
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/open-vm-tools.service
+install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/vmware-vmblock-fuse.service
 ## install_append content
 rm %{buildroot}/sbin/mount.vmhgfs
 mkdir -p %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
 ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
+ln -s ../vmware-vmblock-fuse.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+mkdir -p %{buildroot}/usr/share/xdg/autostart
+ln -s  ../../../defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{buildroot}/usr/share/xdg/autostart
 ## install_append end
 
 %files
@@ -242,9 +253,11 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 %files autostart
 %defattr(-,root,root,-)
 /usr/lib/systemd/system/multi-user.target.wants/open-vm-tools.service
+/usr/lib/systemd/system/multi-user.target.wants/vmware-vmblock-fuse.service
 
 %files bin
 %defattr(-,root,root,-)
+%attr(7755,root,root) /usr/bin/vmware-user-suid-wrapper
 /usr/bin/mount.vmhgfs
 /usr/bin/vmhgfs-fuse
 /usr/bin/vmtoolsd
@@ -255,7 +268,6 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 /usr/bin/vmware-rpctool
 /usr/bin/vmware-toolbox-cmd
 /usr/bin/vmware-user
-/usr/bin/vmware-user-suid-wrapper
 /usr/bin/vmware-vmblock-fuse
 /usr/bin/vmware-xferlogs
 
@@ -282,6 +294,7 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 /usr/share/open-vm-tools/messages/ko/vmtoolsd.vmsg
 /usr/share/open-vm-tools/messages/zh_CN/toolboxcmd.vmsg
 /usr/share/pam.d/vmtoolsd
+/usr/share/xdg/autostart/vmware-user.desktop
 
 %files dev
 %defattr(-,root,root,-)
@@ -335,6 +348,7 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 /usr/lib64/open-vm-tools/plugins/vmsvc/libresolutionKMS.so
 /usr/lib64/open-vm-tools/plugins/vmsvc/libtimeSync.so
 /usr/lib64/open-vm-tools/plugins/vmsvc/libvmbackup.so
+/usr/lib64/open-vm-tools/plugins/vmusr/libdndcp.so
 
 %files license
 %defattr(0644,root,root,0755)
@@ -388,4 +402,6 @@ ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.
 %files services
 %defattr(-,root,root,-)
 %exclude /usr/lib/systemd/system/multi-user.target.wants/open-vm-tools.service
+%exclude /usr/lib/systemd/system/multi-user.target.wants/vmware-vmblock-fuse.service
 /usr/lib/systemd/system/open-vm-tools.service
+/usr/lib/systemd/system/vmware-vmblock-fuse.service
