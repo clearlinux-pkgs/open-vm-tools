@@ -1,2 +1,4 @@
-/usr/lib64/open-vm-tools/plugins/vmusr/libresolutionSet.so
 /usr/lib64/open-vm-tools/plugins/vmusr/libdesktopEvents.so
+/usr/lib64/open-vm-tools/plugins/vmusr/libdndcp.so
+/usr/lib64/open-vm-tools/plugins/vmusr/libresolutionSet.so
+/usr/share/xdg/autostart/vmware-user.desktop

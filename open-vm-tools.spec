@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 10.3.5
-Release  : 28
+Release  : 29
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-10.3.5/open-vm-tools-10.3.5-10430147.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-10.3.5/open-vm-tools-10.3.5-10430147.tar.gz
 Source1  : open-vm-tools.service
@@ -160,7 +160,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1559065312
+export SOURCE_DATE_EPOCH=1559240058
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -185,7 +185,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1559065312
+export SOURCE_DATE_EPOCH=1559240058
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/open-vm-tools
 cp COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/COPYING
@@ -244,7 +244,7 @@ mkdir -p %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
 ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
 ln -s ../vmware-vmblock-fuse.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 mkdir -p %{buildroot}/usr/share/xdg/autostart
-ln -s  ../../../defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{buildroot}/usr/share/xdg/autostart
+mv %{buildroot}/usr/share/defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{buildroot}/usr/share/xdg/autostart/
 ## install_append end
 
 %files
@@ -277,6 +277,7 @@ ln -s  ../../../defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{build
 
 %files data
 %defattr(-,root,root,-)
+%exclude /usr/share/xdg/autostart/vmware-user.desktop
 /usr/share/defaults/open-vm-tools/vmware-tools/guestproxy-ssl.conf
 /usr/share/defaults/open-vm-tools/vmware-tools/poweroff-vm-default
 /usr/share/defaults/open-vm-tools/vmware-tools/poweron-vm-default
@@ -285,7 +286,6 @@ ln -s  ../../../defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{build
 /usr/share/defaults/open-vm-tools/vmware-tools/statechange.subr
 /usr/share/defaults/open-vm-tools/vmware-tools/suspend-vm-default
 /usr/share/defaults/open-vm-tools/vmware-tools/vm-support
-/usr/share/defaults/open-vm-tools/xdg/autostart/vmware-user.desktop
 /usr/share/open-vm-tools/messages/de/toolboxcmd.vmsg
 /usr/share/open-vm-tools/messages/de/vmtoolsd.vmsg
 /usr/share/open-vm-tools/messages/ja/toolboxcmd.vmsg
@@ -294,7 +294,6 @@ ln -s  ../../../defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{build
 /usr/share/open-vm-tools/messages/ko/vmtoolsd.vmsg
 /usr/share/open-vm-tools/messages/zh_CN/toolboxcmd.vmsg
 /usr/share/pam.d/vmtoolsd
-/usr/share/xdg/autostart/vmware-user.desktop
 
 %files dev
 %defattr(-,root,root,-)
@@ -325,11 +324,14 @@ ln -s  ../../../defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{build
 %files extras
 %defattr(-,root,root,-)
 /usr/lib64/open-vm-tools/plugins/vmusr/libdesktopEvents.so
+/usr/lib64/open-vm-tools/plugins/vmusr/libdndcp.so
 /usr/lib64/open-vm-tools/plugins/vmusr/libresolutionSet.so
+/usr/share/xdg/autostart/vmware-user.desktop
 
 %files lib
 %defattr(-,root,root,-)
 %exclude /usr/lib64/open-vm-tools/plugins/vmusr/libdesktopEvents.so
+%exclude /usr/lib64/open-vm-tools/plugins/vmusr/libdndcp.so
 %exclude /usr/lib64/open-vm-tools/plugins/vmusr/libresolutionSet.so
 /usr/lib64/libDeployPkg.so.0
 /usr/lib64/libDeployPkg.so.0.0.0
@@ -348,7 +350,6 @@ ln -s  ../../../defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{build
 /usr/lib64/open-vm-tools/plugins/vmsvc/libresolutionKMS.so
 /usr/lib64/open-vm-tools/plugins/vmsvc/libtimeSync.so
 /usr/lib64/open-vm-tools/plugins/vmsvc/libvmbackup.so
-/usr/lib64/open-vm-tools/plugins/vmusr/libdndcp.so
 
 %files license
 %defattr(0644,root,root,0755)
