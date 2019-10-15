@@ -7,3 +7,4 @@
 --disable-vgauth
 --disable-caf
 --disable-glibc-check
+--without-kernel-modules
