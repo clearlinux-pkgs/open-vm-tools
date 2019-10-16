@@ -1,36 +1,33 @@
-From 19ebfd671a01adfc76583427eed81bafec02d631 Mon Sep 17 00:00:00 2001
-From: William Douglas <william.douglas@intel.com>
-Date: Thu, 26 Jul 2018 18:34:23 +0000
-Subject: [PATCH 2/3] Stateless
+From 73d359b4caa9a304cd0204d944b1b6c0fc116874 Mon Sep 17 00:00:00 2001
+From: Puneet Sethi <puneet.sethi@linux.intel.com>
+Date: Wed, 16 Oct 2019 05:28:15 -0700
+Subject: [PATCH] Stateless
 
 ---
- .../Subsystems/MaIntegration/src/CConfigEnv.cpp               | 2 +-
- lib/guestApp/guestApp.c                                       | 2 +-
- lib/misc/codeset.c                                            | 2 +-
- scripts/Makefile.am                                           | 2 +-
- scripts/Makefile.in                                           | 2 +-
- scripts/common/statechange.sh                                 | 2 +-
- scripts/common/vm-support                                     | 2 +-
- services/vmtoolsd/Makefile.am                                 | 4 ++--
- vgauth/common/prefs.h                                         | 4 ++--
- vgauth/service/Makefile.am                                    | 4 ++--
- vgauth/service/Makefile.in                                    | 2 +-
- vmware-user-suid-wrapper/wrapper.h                            | 2 +-
- 12 files changed, 15 insertions(+), 15 deletions(-)
+ Makefile.am                        | 2 +-
+ lib/guestApp/guestApp.c            | 2 +-
+ lib/misc/codeset.c                 | 4 ++--
+ scripts/Makefile.am                | 2 +-
+ scripts/Makefile.in                | 2 +-
+ scripts/common/statechange.sh      | 2 +-
+ scripts/common/vm-support          | 2 +-
+ services/vmtoolsd/Makefile.am      | 4 ++--
+ vgauth/common/prefs.h              | 4 ++--
+ vgauth/service/Makefile.am         | 4 ++--
+ vmware-user-suid-wrapper/wrapper.h | 2 +-
+ 11 files changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/common-agent/Cpp/ManagementAgent/Subsystems/MaIntegration/src/CConfigEnv.cpp b/common-agent/Cpp/ManagementAgent/Subsystems/MaIntegration/src/CConfigEnv.cpp
-index f1553f7..7d9529c 100644
---- a/common-agent/Cpp/ManagementAgent/Subsystems/MaIntegration/src/CConfigEnv.cpp
-+++ b/common-agent/Cpp/ManagementAgent/Subsystems/MaIntegration/src/CConfigEnv.cpp
-@@ -65,7 +65,7 @@ void CConfigEnv::initialize(
- 		CEnvironmentUtils::readEnvironmentVar("ProgramData", programData);
- 		guestProxyDir = FileSystemUtils::buildPath(programData, "VMware", "VMware Tools", "GuestProxyData");
- #else
--		guestProxyDir = "/etc/vmware-tools/GuestProxyData";
-+		guestProxyDir = "/usr/share/defaults/open-vm-tools/vmware-tools/GuestProxyData";
- #endif
+diff --git a/Makefile.am b/Makefile.am
+index 84a19fa..d01a1c1 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -71,5 +71,5 @@ endif
  
- 		_vcidPath = FileSystemUtils::buildPath(guestProxyDir, "VmVcUuid", "vm.vc.uuid");
+ install-data-local:
+ 	$(INSTALL) -d $(DESTDIR)/etc/vmware-tools/
+-	$(INSTALL) $(srcdir)/tools.conf $(DESTDIR)/etc/vmware-tools/tools.conf.example
++	$(INSTALL) $(srcdir)/tools.conf $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools/tools.conf.example
+ 
 diff --git a/lib/guestApp/guestApp.c b/lib/guestApp/guestApp.c
 index 1e02345..bc41d9c 100644
 --- a/lib/guestApp/guestApp.c
@@ -45,20 +42,23 @@ index 1e02345..bc41d9c 100644
  
  #if defined _WIN32
 diff --git a/lib/misc/codeset.c b/lib/misc/codeset.c
-index 6123af6..f4d4c54 100644
+index 6123af6..bd193ab 100644
 --- a/lib/misc/codeset.c
 +++ b/lib/misc/codeset.c
-@@ -100,7 +100,7 @@
+@@ -100,9 +100,9 @@
  #   define POSIX_ICU_DIR DEFAULT_LIBDIRECTORY
  #elif !defined _WIN32
  #   if defined(VMX86_TOOLS)
 -#      define POSIX_ICU_DIR "/etc/vmware-tools"
 +#      define POSIX_ICU_DIR "/usr/share/defaults/open-vm-tools/vmware-tools"
  #   else
- #      define POSIX_ICU_DIR "/etc/vmware"
+-#      define POSIX_ICU_DIR "/etc/vmware"
++#      define POSIX_ICU_DIR "/usr/share/defaults/open-vm-tools/vmware"
  #   endif
+ #endif
+ 
 diff --git a/scripts/Makefile.am b/scripts/Makefile.am
-index cd18b95..202af36 100644
+index 50c168b..b9d81b1 100644
 --- a/scripts/Makefile.am
 +++ b/scripts/Makefile.am
 @@ -3,7 +3,7 @@ defaultscripts += poweroff-vm-default
@@ -71,36 +71,36 @@ index cd18b95..202af36 100644
  conf_SCRIPTS = ./common/vm-support
  conf_SCRIPTS += ./common/statechange.subr
 diff --git a/scripts/Makefile.in b/scripts/Makefile.in
-index bd0c4d9..6d323d3 100644
+index 99900c4..2e9aba4 100644
 --- a/scripts/Makefile.in
 +++ b/scripts/Makefile.in
-@@ -266,7 +266,7 @@ top_builddir = @top_builddir@
+@@ -275,7 +275,7 @@ top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
  defaultscripts = poweron-vm-default poweroff-vm-default \
  	suspend-vm-default resume-vm-default
 -confdir = /etc/vmware-tools
 +confdir = /usr/share/defaults/open-vm-tools/vmware-tools
  conf_SCRIPTS = ./common/vm-support ./common/statechange.subr \
- 	$(am__append_1) $(defaultscripts)
+ 	$(defaultscripts)
  vmwsrcdir = $(confdir)/scripts/vmware
 diff --git a/scripts/common/statechange.sh b/scripts/common/statechange.sh
-index 39df657..ec9ab4e 100644
+index 39df657..443fda9 100644
 --- a/scripts/common/statechange.sh
 +++ b/scripts/common/statechange.sh
-@@ -31,7 +31,7 @@
- #
- # Handy reference/shorthand used in this doc/scripts:
- #    TOOLS_CONFDIR ::= Depends on platform and installation settings.  Likely
--#                      "/etc/vmware-tools" or
-+#                      "/usr/share/defaults/open-vm-tools/vmware-tools" or
- #                      "/Library/Application Support/VMware Tools"
- #    powerOp       ::= One of "poweron-vm", "poweroff-vm", "suspend-vm", and
- #                      "resume-vm".
+@@ -112,7 +112,7 @@ main() {
+    exitCode=0
+ 
+    vmwScriptDir="$TOOLS_CONFDIR/scripts/vmware"
+-   userScriptDir="$TOOLS_CONFDIR/scripts/${powerOp}-default.d"
++   userScriptDir="/etc/vmware-tools/scripts/${powerOp}-default.d"
+ 
+    case "$powerOp" in
+       poweron-vm|resume-vm)
 diff --git a/scripts/common/vm-support b/scripts/common/vm-support
-index 62634be..73bf3a4 100644
+index 98be74c..7401883 100644
 --- a/scripts/common/vm-support
 +++ b/scripts/common/vm-support
-@@ -327,7 +327,7 @@ banner "Collecting support information..."
+@@ -326,7 +326,7 @@ banner "Collecting support information..."
  # Common stuff that we gather for all OSes.
  runcmd "/tmp/vm-support-version.txt" echo vm-support version: $VER
  
@@ -110,10 +110,10 @@ index 62634be..73bf3a4 100644
  addfiles /var/log/secure*
  addfiles /var/log/messages*
 diff --git a/services/vmtoolsd/Makefile.am b/services/vmtoolsd/Makefile.am
-index c21a8bb..ded56e2 100644
+index e0d1a5b..91eefed 100644
 --- a/services/vmtoolsd/Makefile.am
 +++ b/services/vmtoolsd/Makefile.am
-@@ -83,8 +83,8 @@ install-data-hook:
+@@ -84,8 +84,8 @@ install-data-hook:
  	@INSTVMSG@ vmtoolsd $(srcdir)/l10n $(DESTDIR)$(datadir)
  
  install-exec-hook:
@@ -125,7 +125,7 @@ index c21a8bb..ded56e2 100644
 +	rm -rf $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools
  
 diff --git a/vgauth/common/prefs.h b/vgauth/common/prefs.h
-index 608b825..49a4358 100644
+index ff11692..8776c1e 100644
 --- a/vgauth/common/prefs.h
 +++ b/vgauth/common/prefs.h
 @@ -64,7 +64,7 @@ void Pref_LogAllEntries(const PrefHandle ph);
@@ -137,47 +137,34 @@ index 608b825..49a4358 100644
  // XXX temp til installer tweaks its location
  #define VGAUTH_PREF_CONFIG_FILENAME_OLD "/etc/vmware/vgauth.conf"
  #endif
-@@ -101,7 +101,7 @@ ticketTTL=3600
- auditSuccessEvents=true
+@@ -192,7 +192,7 @@ msgCatalog = /etc/vmware-tools/vgauth/messages
+ #ifdef _WIN32
+ #define VGAUTH_PREF_DEFAULT_LOCALIZATION_CATALOG "."
+ #else
+-#define VGAUTH_PREF_DEFAULT_LOCALIZATION_CATALOG "/etc/vmware-tools"
++#define VGAUTH_PREF_DEFAULT_LOCALIZATION_CATALOG "/usr/share/defaults/open-vm-tools/vmware-tools"
+ #endif
  
- [localization]
--msgCatalog = /etc/vmware-tools/vgauth/messages
-+msgCatalog = /usr/share/defaults/open-vm-tools/vmware-tools/vgauth/messages
- # EOF
-  @endverbatim
-  * See http://developer.gnome.org/glib/2.28/glib-Key-value-file-parser.html#glib-Key-value-file-parser.description
+ #define VGAUTH_PREF_DEFAULT_MAX_DATA_CONNECTIONS_PER_USER 5
 diff --git a/vgauth/service/Makefile.am b/vgauth/service/Makefile.am
-index 575cf38..b43e2d0 100644
+index 774808e..4f586fc 100644
 --- a/vgauth/service/Makefile.am
 +++ b/vgauth/service/Makefile.am
-@@ -47,7 +47,7 @@ VGAuthService_SOURCES += ../common/usercheck.c
- VGAuthService_SOURCES += ../common/VGAuthLog.c
+@@ -48,7 +48,7 @@ VGAuthService_SOURCES += ../common/VGAuthLog.c
  VGAuthService_SOURCES += ../common/VGAuthUtil.c
+ VGAuthService_SOURCES += ../common/vmxlog.c
  
 -VGAuthServicedir = /etc/vmware-tools/vgauth/schemas
 +VGAuthServicedir = /usr/share/defaults/open-vm-tools/vmware-tools/vgauth/schemas
  VGAuthService_SCRIPTS =
  VGAuthService_SCRIPTS += ../serviceImpl/schemas/datatypes.dtd
  VGAuthService_SCRIPTS += ../serviceImpl/schemas/saml-schema-assertion-2.0.xsd
-@@ -104,4 +104,4 @@ endif
+@@ -105,4 +105,4 @@ endif
  # Message catalogs.
  install-data-hook:
  	@INSTVMSG@ VGAuthService $(srcdir)/l10n $(DESTDIR)$(datadir)
 -	cat vgauth.conf | sed -e"s!@@VGAUTHSCHEMADIR@@!$(VGAuthServicedir)!" > $(DESTDIR)/etc/vmware-tools/vgauth.conf
 +	cat vgauth.conf | sed -e"s!@@VGAUTHSCHEMADIR@@!$(VGAuthServicedir)!" > $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools/vgauth.conf
-diff --git a/vgauth/service/Makefile.in b/vgauth/service/Makefile.in
-index 05d7cd6..9a09d4f 100644
---- a/vgauth/service/Makefile.in
-+++ b/vgauth/service/Makefile.in
-@@ -360,7 +360,7 @@ VGAuthService_SOURCES = main.c fileLogger.c gio.c log.c servicePosix.c \
- 	../common/audit.c ../common/certverify.c ../common/i18n.c \
- 	../common/prefs.c ../common/usercheck.c ../common/VGAuthLog.c \
- 	../common/VGAuthUtil.c
--VGAuthServicedir = /etc/vmware-tools/vgauth/schemas
-+VGAuthServicedir = /usr/share/defaults/open-vm-tools/vmware-tools/vgauth/schemas
- VGAuthService_SCRIPTS = ../serviceImpl/schemas/datatypes.dtd \
- 	../serviceImpl/schemas/saml-schema-assertion-2.0.xsd \
- 	../serviceImpl/schemas/xenc-schema.xsd \
 diff --git a/vmware-user-suid-wrapper/wrapper.h b/vmware-user-suid-wrapper/wrapper.h
 index 82b4ee9..a509503 100644
 --- a/vmware-user-suid-wrapper/wrapper.h
@@ -192,5 +179,5 @@ index 82b4ee9..a509503 100644
  /*
   * Locations DB query selector.  Values in this enum are used as array
 -- 
-2.18.0
+2.23.0
 
