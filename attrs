@@ -1,1 +1,2 @@
 7755 root root /usr/bin/vmware-user-suid-wrapper
+0644 root root /usr/lib/udev/rules.d/99-vmware-scsi-udev.rules
