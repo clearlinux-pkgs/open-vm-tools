@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 11.0.0
-Release  : 30
+Release  : 31
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-11.0.0/open-vm-tools-11.0.0-14549434.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-11.0.0/open-vm-tools-11.0.0-14549434.tar.gz
 Source1  : open-vm-tools.service
@@ -160,7 +160,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571238460
+export SOURCE_DATE_EPOCH=1571431288
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -187,7 +187,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1571238460
+export SOURCE_DATE_EPOCH=1571431288
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/open-vm-tools
 cp %{_builddir}/open-vm-tools-11.0.0-14549434/COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/70e5b527a568a6a75b977976e2d392fadf9bd84a
@@ -258,7 +258,7 @@ mv %{buildroot}/usr/share/defaults/open-vm-tools/xdg/autostart/vmware-user.deskt
 
 %files bin
 %defattr(-,root,root,-)
-%attr(7755,root,root) /usr/bin/vmware-user-suid-wrapper
+%attr(4755,root,root) /usr/bin/vmware-user-suid-wrapper
 /usr/bin/mount.vmhgfs
 /usr/bin/vmhgfs-fuse
 /usr/bin/vmtoolsd
