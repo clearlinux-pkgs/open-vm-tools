@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 11.0.0
-Release  : 31
+Release  : 32
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-11.0.0/open-vm-tools-11.0.0-14549434.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-11.0.0/open-vm-tools-11.0.0-14549434.tar.gz
 Source1  : open-vm-tools.service
