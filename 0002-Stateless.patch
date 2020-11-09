@@ -1,4 +1,4 @@
-From 73d359b4caa9a304cd0204d944b1b6c0fc116874 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Puneet Sethi <puneet.sethi@linux.intel.com>
 Date: Wed, 16 Oct 2019 05:28:15 -0700
 Subject: [PATCH] Stateless
@@ -8,28 +8,27 @@ Subject: [PATCH] Stateless
  lib/guestApp/guestApp.c            | 2 +-
  lib/misc/codeset.c                 | 4 ++--
  scripts/Makefile.am                | 2 +-
- scripts/Makefile.in                | 2 +-
  scripts/common/statechange.sh      | 2 +-
  scripts/common/vm-support          | 2 +-
- services/vmtoolsd/Makefile.am      | 4 ++--
+ services/vmtoolsd/Makefile.am      | 2 +-
  vgauth/common/prefs.h              | 4 ++--
  vgauth/service/Makefile.am         | 4 ++--
  vmware-user-suid-wrapper/wrapper.h | 2 +-
- 11 files changed, 15 insertions(+), 15 deletions(-)
+ 10 files changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 84a19fa..d01a1c1 100644
+index 3c72c39..0735b42 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -71,5 +71,5 @@ endif
  
  install-data-local:
  	$(INSTALL) -d $(DESTDIR)/etc/vmware-tools/
--	$(INSTALL) $(srcdir)/tools.conf $(DESTDIR)/etc/vmware-tools/tools.conf.example
-+	$(INSTALL) $(srcdir)/tools.conf $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools/tools.conf.example
+-	$(INSTALL) -m 644 $(srcdir)/tools.conf $(DESTDIR)/etc/vmware-tools/tools.conf.example
++	$(INSTALL) -m 644 $(srcdir)/tools.conf $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools/tools.conf.example
  
 diff --git a/lib/guestApp/guestApp.c b/lib/guestApp/guestApp.c
-index 1e02345..bc41d9c 100644
+index c767d5d..2ff7bb7 100644
 --- a/lib/guestApp/guestApp.c
 +++ b/lib/guestApp/guestApp.c
 @@ -63,7 +63,7 @@
@@ -42,7 +41,7 @@ index 1e02345..bc41d9c 100644
  
  #if defined _WIN32
 diff --git a/lib/misc/codeset.c b/lib/misc/codeset.c
-index 6123af6..bd193ab 100644
+index 25221f6..e21efe8 100644
 --- a/lib/misc/codeset.c
 +++ b/lib/misc/codeset.c
 @@ -100,9 +100,9 @@
@@ -58,31 +57,18 @@ index 6123af6..bd193ab 100644
  #endif
  
 diff --git a/scripts/Makefile.am b/scripts/Makefile.am
-index 50c168b..b9d81b1 100644
+index 55c218b..2d7b070 100644
 --- a/scripts/Makefile.am
 +++ b/scripts/Makefile.am
-@@ -3,7 +3,7 @@ defaultscripts += poweroff-vm-default
+@@ -20,7 +20,7 @@ defaultscripts += poweroff-vm-default
  defaultscripts += suspend-vm-default
  defaultscripts += resume-vm-default
  
 -confdir = /etc/vmware-tools
 +confdir = /usr/share/defaults/open-vm-tools/vmware-tools
  
- conf_SCRIPTS = ./common/vm-support
- conf_SCRIPTS += ./common/statechange.subr
-diff --git a/scripts/Makefile.in b/scripts/Makefile.in
-index 99900c4..2e9aba4 100644
---- a/scripts/Makefile.in
-+++ b/scripts/Makefile.in
-@@ -275,7 +275,7 @@ top_builddir = @top_builddir@
- top_srcdir = @top_srcdir@
- defaultscripts = poweron-vm-default poweroff-vm-default \
- 	suspend-vm-default resume-vm-default
--confdir = /etc/vmware-tools
-+confdir = /usr/share/defaults/open-vm-tools/vmware-tools
- conf_SCRIPTS = ./common/vm-support ./common/statechange.subr \
- 	$(defaultscripts)
- vmwsrcdir = $(confdir)/scripts/vmware
+ conf_SCRIPTS = ./common/statechange.subr
+ conf_SCRIPTS += $(defaultscripts)
 diff --git a/scripts/common/statechange.sh b/scripts/common/statechange.sh
 index 39df657..443fda9 100644
 --- a/scripts/common/statechange.sh
@@ -110,19 +96,17 @@ index 98be74c..7401883 100644
  addfiles /var/log/secure*
  addfiles /var/log/messages*
 diff --git a/services/vmtoolsd/Makefile.am b/services/vmtoolsd/Makefile.am
-index e0d1a5b..91eefed 100644
+index c2ac93a..b660adf 100644
 --- a/services/vmtoolsd/Makefile.am
 +++ b/services/vmtoolsd/Makefile.am
-@@ -84,8 +84,8 @@ install-data-hook:
+@@ -76,7 +76,7 @@ install-data-hook:
  	@INSTVMSG@ vmtoolsd $(srcdir)/l10n $(DESTDIR)$(datadir)
  
  install-exec-hook:
 -	$(INSTALL) -d $(DESTDIR)/etc/vmware-tools
 +	$(INSTALL) -d $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools
- 
- uninstall-hook:
--	rm -rf $(DESTDIR)/etc/vmware-tools
-+	rm -rf $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools
+ 	$(INSTALL) -d $(DESTDIR)/$(PAM_PREFIX)/pam.d/
+ 	$(INSTALL) $(top_srcdir)/pam/generic $(DESTDIR)/$(PAM_PREFIX)/pam.d/vmtoolsd
  
 diff --git a/vgauth/common/prefs.h b/vgauth/common/prefs.h
 index ff11692..8776c1e 100644
@@ -147,7 +131,7 @@ index ff11692..8776c1e 100644
  
  #define VGAUTH_PREF_DEFAULT_MAX_DATA_CONNECTIONS_PER_USER 5
 diff --git a/vgauth/service/Makefile.am b/vgauth/service/Makefile.am
-index 774808e..4f586fc 100644
+index 240f73e..6c1d5b0 100644
 --- a/vgauth/service/Makefile.am
 +++ b/vgauth/service/Makefile.am
 @@ -48,7 +48,7 @@ VGAuthService_SOURCES += ../common/VGAuthLog.c
@@ -159,12 +143,12 @@ index 774808e..4f586fc 100644
  VGAuthService_SCRIPTS =
  VGAuthService_SCRIPTS += ../serviceImpl/schemas/datatypes.dtd
  VGAuthService_SCRIPTS += ../serviceImpl/schemas/saml-schema-assertion-2.0.xsd
-@@ -105,4 +105,4 @@ endif
- # Message catalogs.
+@@ -108,4 +108,4 @@ VGAuthMsgDir = $(datadir)/open-vm-tools
  install-data-hook:
  	@INSTVMSG@ VGAuthService $(srcdir)/l10n $(DESTDIR)$(datadir)
--	cat vgauth.conf | sed -e"s!@@VGAUTHSCHEMADIR@@!$(VGAuthServicedir)!" > $(DESTDIR)/etc/vmware-tools/vgauth.conf
-+	cat vgauth.conf | sed -e"s!@@VGAUTHSCHEMADIR@@!$(VGAuthServicedir)!" > $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools/vgauth.conf
+ 	cat vgauth.conf | sed -e"s!@@VGAUTHSCHEMADIR@@!$(VGAuthServicedir)!" \
+-                   |  sed -e"s!@@VGAUTHMSGDIR@@!$(VGAuthMsgDir)!" > $(DESTDIR)/etc/vmware-tools/vgauth.conf
++                   |  sed -e"s!@@VGAUTHMSGDIR@@!$(VGAuthMsgDir)!" > $(DESTDIR)/usr/share/defaults/open-vm-tools/vmware-tools/vgauth.conf
 diff --git a/vmware-user-suid-wrapper/wrapper.h b/vmware-user-suid-wrapper/wrapper.h
 index 82b4ee9..a509503 100644
 --- a/vmware-user-suid-wrapper/wrapper.h
@@ -178,6 +162,3 @@ index 82b4ee9..a509503 100644
  
  /*
   * Locations DB query selector.  Values in this enum are used as array
--- 
-2.23.0
-

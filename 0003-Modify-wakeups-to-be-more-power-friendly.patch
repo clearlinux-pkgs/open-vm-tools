@@ -1,7 +1,7 @@
-From cf09c3be9ee2d1ec02fdd4c8f058862c11a5b966 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Douglas <william.douglas@intel.com>
 Date: Thu, 26 Jul 2018 18:36:17 +0000
-Subject: [PATCH 3/3] Modify wakeups to be more power friendly
+Subject: [PATCH] Modify wakeups to be more power friendly
 
 ---
  lib/poll/poll.c                | 2 +-
@@ -9,10 +9,10 @@ Subject: [PATCH 3/3] Modify wakeups to be more power friendly
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/lib/poll/poll.c b/lib/poll/poll.c
-index 374396e..9693f26 100644
+index da2db36..538b9f8 100644
 --- a/lib/poll/poll.c
 +++ b/lib/poll/poll.c
-@@ -50,7 +50,7 @@
+@@ -51,7 +51,7 @@
   * POLL_MAIN_LOOP events are fired.  --hpreg
   */
  
@@ -22,7 +22,7 @@ index 374396e..9693f26 100644
  
  static const PollImpl *pollImpl = NULL;
 diff --git a/lib/rpcChannel/rpcChannelInt.h b/lib/rpcChannel/rpcChannelInt.h
-index 7d2d2a5..ecb9adf 100644
+index e0993e3..48e3db9 100644
 --- a/lib/rpcChannel/rpcChannelInt.h
 +++ b/lib/rpcChannel/rpcChannelInt.h
 @@ -36,7 +36,7 @@
@@ -34,6 +34,3 @@ index 7d2d2a5..ecb9adf 100644
  
  struct RpcIn;
  #endif
--- 
-2.18.0
-
