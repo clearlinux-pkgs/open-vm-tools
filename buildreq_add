@@ -13,3 +13,4 @@ graphviz
 fuse-dev
 compat-fuse-soname2-dev
 xmlsec1-dev
+gdk-pixbuf-xlib-dev

@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 11.2.0
-Release  : 33
+Release  : 34
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-11.2.0/open-vm-tools-11.2.0-16938113.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-11.2.0/open-vm-tools-11.2.0-16938113.tar.gz
 Source1  : open-vm-tools.service
@@ -27,6 +27,7 @@ BuildRequires : compat-fuse-soname2-dev
 BuildRequires : doxygen
 BuildRequires : fuse
 BuildRequires : fuse-dev
+BuildRequires : gdk-pixbuf-xlib-dev
 BuildRequires : gettext-bin
 BuildRequires : glib-dev
 BuildRequires : graphviz
@@ -162,7 +163,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604905776
+export SOURCE_DATE_EPOCH=1608254265
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -189,7 +190,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604905776
+export SOURCE_DATE_EPOCH=1608254265
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/open-vm-tools
 cp %{_builddir}/open-vm-tools-11.2.0-16938113/COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/70e5b527a568a6a75b977976e2d392fadf9bd84a

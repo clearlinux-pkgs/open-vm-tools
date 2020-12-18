@@ -1,7 +1,4 @@
-Configure miss: sys/inttypes.h usability
-Configure miss: sys/inttypes.h presence
+Configure miss: g++ option to enable C++11 features
 Configure miss: sys/inttypes.h
-Configure miss: syslimits.h usability
-Configure miss: syslimits.h presence
 Configure miss: syslimits.h
 Configure miss: mscgen
