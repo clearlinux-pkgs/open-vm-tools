@@ -12,4 +12,5 @@ libgthread-2.0.so.0
 libmspack.so.0
 libpthread.so.0
 librt.so.1
+libtirpc.so.3
 libudev.so.1

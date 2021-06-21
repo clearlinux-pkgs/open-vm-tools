@@ -1,4 +1,4 @@
 Configure miss: g++ option to enable C++11 features
+Configure miss: mscgen
 Configure miss: sys/inttypes.h
 Configure miss: syslimits.h
-Configure miss: mscgen
