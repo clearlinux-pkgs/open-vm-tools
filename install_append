@@ -1,7 +1,5 @@
-rm %{buildroot}/sbin/mount.vmhgfs
-mkdir -p %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
-ln -s ../open-vm-tools.service  %{buildroot}//usr/lib/systemd/system/multi-user.target.wants
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../open-vm-tools.service  %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s ../vmware-vmblock-fuse.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 mkdir -p %{buildroot}/usr/share/xdg/autostart
 mv %{buildroot}/usr/share/defaults/open-vm-tools/xdg/autostart/vmware-user.desktop %{buildroot}/usr/share/xdg/autostart/
-

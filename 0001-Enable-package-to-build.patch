@@ -13,7 +13,7 @@ diff --git a/configure.ac b/configure.ac
 index fe8f537..aa196dd 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1205,7 +1205,6 @@ AC_C_VOLATILE
+@@ -1222,7 +1222,6 @@ AC_C_VOLATILE
  
  ### General flags / actions
  CFLAGS="$CFLAGS -Wall"

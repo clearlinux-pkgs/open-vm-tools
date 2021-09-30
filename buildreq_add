@@ -1,16 +1,16 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-libmspack-dev
-libXext-dev
-openssl-dev
 Linux-PAM-dev
+compat-fuse-soname2-dev
+doxygen
+fuse-dev
+gdk-pixbuf-xlib-dev
 glib-dev
+graphviz
 gtk3-dev
 libSM-dev
+libXext-dev
+libmspack-dev
+openssl-dev
 procps-ng-dev
-doxygen
-graphviz
-fuse-dev
-compat-fuse-soname2-dev
 xmlsec1-dev
-gdk-pixbuf-xlib-dev

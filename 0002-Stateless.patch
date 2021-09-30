@@ -20,7 +20,7 @@ diff --git a/Makefile.am b/Makefile.am
 index 3c72c39..0735b42 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -71,5 +71,5 @@ endif
+@@ -73,5 +73,5 @@ endif
  
  install-data-local:
  	$(INSTALL) -d $(DESTDIR)/etc/vmware-tools/
@@ -86,7 +86,7 @@ diff --git a/scripts/common/vm-support b/scripts/common/vm-support
 index 98be74c..7401883 100644
 --- a/scripts/common/vm-support
 +++ b/scripts/common/vm-support
-@@ -326,7 +326,7 @@ banner "Collecting support information..."
+@@ -352,7 +352,7 @@ banner "Collecting support information..."
  # Common stuff that we gather for all OSes.
  runcmd "/tmp/vm-support-version.txt" echo vm-support version: $VER
  
@@ -99,7 +99,7 @@ diff --git a/services/vmtoolsd/Makefile.am b/services/vmtoolsd/Makefile.am
 index c2ac93a..b660adf 100644
 --- a/services/vmtoolsd/Makefile.am
 +++ b/services/vmtoolsd/Makefile.am
-@@ -76,7 +76,7 @@ install-data-hook:
+@@ -79,7 +79,7 @@ install-data-hook:
  	@INSTVMSG@ vmtoolsd $(srcdir)/l10n $(DESTDIR)$(datadir)
  
  install-exec-hook:
