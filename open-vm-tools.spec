@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 11.3.5
-Release  : 36
+Release  : 37
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-11.3.5/open-vm-tools-11.3.5-18557794.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-11.3.5/open-vm-tools-11.3.5-18557794.tar.gz
 Source1  : open-vm-tools.service
@@ -19,13 +19,13 @@ Requires: open-vm-tools-data = %{version}-%{release}
 Requires: open-vm-tools-lib = %{version}-%{release}
 Requires: open-vm-tools-license = %{version}-%{release}
 Requires: open-vm-tools-services = %{version}-%{release}
+Requires: open-vm-tools-setuid = %{version}-%{release}
 Requires: fuse
 BuildRequires : Linux-PAM-dev
 BuildRequires : automake
 BuildRequires : automake-dev
 BuildRequires : compat-fuse-soname2-dev
 BuildRequires : doxygen
-BuildRequires : fuse
 BuildRequires : fuse-dev
 BuildRequires : gdk-pixbuf-xlib-dev
 BuildRequires : gettext-bin
@@ -73,6 +73,7 @@ Summary: bin components for the open-vm-tools package.
 Group: Binaries
 Requires: open-vm-tools-data = %{version}-%{release}
 Requires: open-vm-tools-config = %{version}-%{release}
+Requires: open-vm-tools-setuid = %{version}-%{release}
 Requires: open-vm-tools-license = %{version}-%{release}
 Requires: open-vm-tools-services = %{version}-%{release}
 
@@ -151,6 +152,14 @@ Group: Systemd services
 services components for the open-vm-tools package.
 
 
+%package setuid
+Summary: setuid components for the open-vm-tools package.
+Group: Default
+
+%description setuid
+setuid components for the open-vm-tools package.
+
+
 %prep
 %setup -q -n open-vm-tools-11.3.5-18557794
 cd %{_builddir}/open-vm-tools-11.3.5-18557794
@@ -163,7 +172,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1633020453
+export SOURCE_DATE_EPOCH=1643312890
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -190,7 +199,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1633020453
+export SOURCE_DATE_EPOCH=1643312890
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/open-vm-tools
 cp %{_builddir}/open-vm-tools-11.3.5-18557794/COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/70e5b527a568a6a75b977976e2d392fadf9bd84a
@@ -267,7 +276,6 @@ mv %{buildroot}/usr/share/defaults/open-vm-tools/xdg/autostart/vmware-user.deskt
 
 %files bin
 %defattr(-,root,root,-)
-%attr(4755,root,root) /usr/bin/vmware-user-suid-wrapper
 /usr/bin/vm-support
 /usr/bin/vmhgfs-fuse
 /usr/bin/vmtoolsd
@@ -387,3 +395,7 @@ mv %{buildroot}/usr/share/defaults/open-vm-tools/xdg/autostart/vmware-user.deskt
 %exclude /usr/lib/systemd/system/multi-user.target.wants/vmware-vmblock-fuse.service
 /usr/lib/systemd/system/open-vm-tools.service
 /usr/lib/systemd/system/vmware-vmblock-fuse.service
+
+%files setuid
+%defattr(-,root,root,-)
+%attr(4755,root,root) /usr/bin/vmware-user-suid-wrapper
