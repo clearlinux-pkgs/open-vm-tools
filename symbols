@@ -65,6 +65,8 @@ libguestStoreClient.so.0:CodeSet_IsEncodingSupported
 libguestStoreClient.so.0:CodeSet_IsStringValidUTF8
 libguestStoreClient.so.0:CodeSet_IsValidUTF8
 libguestStoreClient.so.0:CodeSet_IsValidUTF8String
+libguestStoreClient.so.0:CodeSet_JsonEscape
+libguestStoreClient.so.0:CodeSet_JsonUnescape
 libguestStoreClient.so.0:CodeSet_LengthInCodePoints
 libguestStoreClient.so.0:CodeSet_UTF32ToUTF8
 libguestStoreClient.so.0:CodeSet_UTF8ToUTF32
@@ -72,6 +74,7 @@ libguestStoreClient.so.0:CodeSet_Utf16beToCurrent
 libguestStoreClient.so.0:CodeSet_Utf16leToCurrent
 libguestStoreClient.so.0:CodeSet_Utf16leToUtf8
 libguestStoreClient.so.0:CodeSet_Utf16leToUtf8Db
+libguestStoreClient.so.0:CodeSet_Utf8Escape
 libguestStoreClient.so.0:CodeSet_Utf8FormCToUtf8FormD
 libguestStoreClient.so.0:CodeSet_Utf8FormDToUtf8FormC
 libguestStoreClient.so.0:CodeSet_Utf8ToCurrent
@@ -481,6 +484,8 @@ libguestlib.so.0:CodeSet_IsEncodingSupported
 libguestlib.so.0:CodeSet_IsStringValidUTF8
 libguestlib.so.0:CodeSet_IsValidUTF8
 libguestlib.so.0:CodeSet_IsValidUTF8String
+libguestlib.so.0:CodeSet_JsonEscape
+libguestlib.so.0:CodeSet_JsonUnescape
 libguestlib.so.0:CodeSet_LengthInCodePoints
 libguestlib.so.0:CodeSet_UTF32ToUTF8
 libguestlib.so.0:CodeSet_UTF8ToUTF32
@@ -488,6 +493,7 @@ libguestlib.so.0:CodeSet_Utf16beToCurrent
 libguestlib.so.0:CodeSet_Utf16leToCurrent
 libguestlib.so.0:CodeSet_Utf16leToUtf8
 libguestlib.so.0:CodeSet_Utf16leToUtf8Db
+libguestlib.so.0:CodeSet_Utf8Escape
 libguestlib.so.0:CodeSet_Utf8FormCToUtf8FormD
 libguestlib.so.0:CodeSet_Utf8FormDToUtf8FormC
 libguestlib.so.0:CodeSet_Utf8ToCurrent
@@ -1331,6 +1337,8 @@ libvmtools.so.0:CodeSet_IsEncodingSupported
 libvmtools.so.0:CodeSet_IsStringValidUTF8
 libvmtools.so.0:CodeSet_IsValidUTF8
 libvmtools.so.0:CodeSet_IsValidUTF8String
+libvmtools.so.0:CodeSet_JsonEscape
+libvmtools.so.0:CodeSet_JsonUnescape
 libvmtools.so.0:CodeSet_LengthInCodePoints
 libvmtools.so.0:CodeSet_UTF32ToUTF8
 libvmtools.so.0:CodeSet_UTF8ToUTF32
@@ -1338,6 +1346,7 @@ libvmtools.so.0:CodeSet_Utf16beToCurrent
 libvmtools.so.0:CodeSet_Utf16leToCurrent
 libvmtools.so.0:CodeSet_Utf16leToUtf8
 libvmtools.so.0:CodeSet_Utf16leToUtf8Db
+libvmtools.so.0:CodeSet_Utf8Escape
 libvmtools.so.0:CodeSet_Utf8FormCToUtf8FormD
 libvmtools.so.0:CodeSet_Utf8FormDToUtf8FormC
 libvmtools.so.0:CodeSet_Utf8ToCurrent
@@ -1428,6 +1437,7 @@ libvmtools.so.0:FileIO_Cleanup
 libvmtools.so.0:FileIO_Close
 libvmtools.so.0:FileIO_CloseAndUnlink
 libvmtools.so.0:FileIO_Create
+libvmtools.so.0:FileIO_CreateDeviceFileNoPrompt
 libvmtools.so.0:FileIO_CreateFDPosix
 libvmtools.so.0:FileIO_CreateRetry
 libvmtools.so.0:FileIO_DescriptorToStream
@@ -1847,6 +1857,7 @@ libvmtools.so.0:Poll_CallbackRemoveOneByCB
 libvmtools.so.0:Poll_Exit
 libvmtools.so.0:Poll_InitGtk
 libvmtools.so.0:Poll_InitWithImpl
+libvmtools.so.0:Poll_IsInitialized
 libvmtools.so.0:Poll_LockingEnabled
 libvmtools.so.0:Poll_Loop
 libvmtools.so.0:Poll_LoopTimeout
@@ -2205,6 +2216,7 @@ libvmtools.so.0:VMTools_SuspendLogIO
 libvmtools.so.0:VMTools_TeardownVmxGuestLog
 libvmtools.so.0:VMTools_UseVmxGuestLog
 libvmtools.so.0:VMTools_VmxLog
+libvmtools.so.0:VMTools_VmxLogThrottled
 libvmtools.so.0:VMTools_WrapArray
 libvmtools.so.0:VMTools_WriteConfig
 libvmtools.so.0:VSockChannel_New
