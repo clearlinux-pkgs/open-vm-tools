@@ -17,7 +17,7 @@ Subject: [PATCH] Stateless
  10 files changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 3c72c39..0735b42 100644
+index 3029679..def6719 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -73,5 +73,5 @@ endif
@@ -83,10 +83,10 @@ index 39df657..443fda9 100644
     case "$powerOp" in
        poweron-vm|resume-vm)
 diff --git a/scripts/common/vm-support b/scripts/common/vm-support
-index 98be74c..7401883 100644
+index 5943e4b..04f39bc 100644
 --- a/scripts/common/vm-support
 +++ b/scripts/common/vm-support
-@@ -352,7 +352,7 @@ banner "Collecting support information..."
+@@ -326,7 +326,7 @@ banner "Collecting support information..."
  # Common stuff that we gather for all OSes.
  runcmd "/tmp/vm-support-version.txt" echo vm-support version: $VER
  
@@ -96,7 +96,7 @@ index 98be74c..7401883 100644
  addfiles /var/log/secure*
  addfiles /var/log/messages*
 diff --git a/services/vmtoolsd/Makefile.am b/services/vmtoolsd/Makefile.am
-index c2ac93a..b660adf 100644
+index f337031..ba117f0 100644
 --- a/services/vmtoolsd/Makefile.am
 +++ b/services/vmtoolsd/Makefile.am
 @@ -79,7 +79,7 @@ install-data-hook:

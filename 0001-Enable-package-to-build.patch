@@ -10,10 +10,10 @@ function.
  1 file changed, 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index fe8f537..aa196dd 100644
+index 6411970..f429549 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1222,7 +1222,6 @@ AC_C_VOLATILE
+@@ -1451,7 +1451,6 @@ AC_C_VOLATILE
  
  ### General flags / actions
  CFLAGS="$CFLAGS -Wall"

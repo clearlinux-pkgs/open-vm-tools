@@ -9,7 +9,7 @@ Subject: [PATCH] Modify wakeups to be more power friendly
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/lib/poll/poll.c b/lib/poll/poll.c
-index da2db36..538b9f8 100644
+index c568632..57eb288 100644
 --- a/lib/poll/poll.c
 +++ b/lib/poll/poll.c
 @@ -51,7 +51,7 @@
