@@ -3,6 +3,7 @@ libDeployPkg.so.0:DeployPkg_DeployPackageFromFile
 libDeployPkg.so.0:DeployPkg_DeployPackageFromFileEx
 libDeployPkg.so.0:DeployPkg_SetLogger
 libDeployPkg.so.0:DeployPkg_SetProcessTimeout
+libDeployPkg.so.0:DeployPkg_SetWaitForCloudinitDoneTimeout
 libDeployPkg.so.0:ExpandAllFilesInCab
 libDeployPkg.so.0:ExtractCabPackage
 libDeployPkg.so.0:ForkExecAndWaitCommand
