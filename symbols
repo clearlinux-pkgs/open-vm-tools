@@ -179,7 +179,6 @@ libguestStoreClient.so.0:Hostinfo_QueryProcessExistence
 libguestStoreClient.so.0:Hostinfo_QueryProcessSnapshot
 libguestStoreClient.so.0:Hostinfo_ReleaseProcessSnapshot
 libguestStoreClient.so.0:Hostinfo_ResetProcessState
-libguestStoreClient.so.0:Hostinfo_SynchronizedVTSCs
 libguestStoreClient.so.0:Hostinfo_SystemTimerNS
 libguestStoreClient.so.0:Hostinfo_SystemUpTime
 libguestStoreClient.so.0:Hostinfo_TouchBackDoor
@@ -629,7 +628,6 @@ libguestlib.so.0:Hostinfo_QueryProcessExistence
 libguestlib.so.0:Hostinfo_QueryProcessSnapshot
 libguestlib.so.0:Hostinfo_ReleaseProcessSnapshot
 libguestlib.so.0:Hostinfo_ResetProcessState
-libguestlib.so.0:Hostinfo_SynchronizedVTSCs
 libguestlib.so.0:Hostinfo_SystemTimerNS
 libguestlib.so.0:Hostinfo_SystemUpTime
 libguestlib.so.0:Hostinfo_TouchBackDoor
@@ -1228,6 +1226,7 @@ libvmtools.so.0:AsyncSocket_CancelCbForClose
 libvmtools.so.0:AsyncSocket_CancelRecv
 libvmtools.so.0:AsyncSocket_CancelRecvEx
 libvmtools.so.0:AsyncSocket_Close
+libvmtools.so.0:AsyncSocket_CloseWrite
 libvmtools.so.0:AsyncSocket_Connect
 libvmtools.so.0:AsyncSocket_ConnectSSL
 libvmtools.so.0:AsyncSocket_ConnectUnixDomain
@@ -1691,7 +1690,6 @@ libvmtools.so.0:Hostinfo_QueryProcessExistence
 libvmtools.so.0:Hostinfo_QueryProcessSnapshot
 libvmtools.so.0:Hostinfo_ReleaseProcessSnapshot
 libvmtools.so.0:Hostinfo_ResetProcessState
-libvmtools.so.0:Hostinfo_SynchronizedVTSCs
 libvmtools.so.0:Hostinfo_SystemTimerNS
 libvmtools.so.0:Hostinfo_SystemUpTime
 libvmtools.so.0:Hostinfo_TouchBackDoor
@@ -1846,7 +1844,6 @@ libvmtools.so.0:Panic_BreakOnPanic
 libvmtools.so.0:Panic_DumpGuiResources
 libvmtools.so.0:Panic_GetBreakAction
 libvmtools.so.0:Panic_GetBreakOnPanic
-libvmtools.so.0:Panic_GetCoreDumpFileName
 libvmtools.so.0:Panic_GetCoreDumpFlags
 libvmtools.so.0:Panic_GetCoreDumpOnPanic
 libvmtools.so.0:Panic_GetPanicMsgPost
@@ -1855,7 +1852,6 @@ libvmtools.so.0:Panic_LoopOnPanic
 libvmtools.so.0:Panic_Panic
 libvmtools.so.0:Panic_PostPanicMsg
 libvmtools.so.0:Panic_SetBreakAction
-libvmtools.so.0:Panic_SetCoreDumpFileName
 libvmtools.so.0:Panic_SetCoreDumpFlags
 libvmtools.so.0:Panic_SetCoreDumpOnPanic
 libvmtools.so.0:Panic_SetPanicMsgPost

@@ -1,16 +1,14 @@
-Configure miss: /usr/share/gocode/src/github.com/containerd/containerd/api/services/containers/v1/containers.proto
-Configure miss: /usr/share/gocode/src/github.com/containerd/containerd/api/services/tasks/v1/tasks.proto
-Configure miss: /usr/share/gocode/src/github.com/containerd/containerd/api/types/descriptor.proto
-Configure miss: /usr/share/gocode/src/github.com/containerd/containerd/api/types/metrics.proto
-Configure miss: /usr/share/gocode/src/github.com/containerd/containerd/api/types/mount.proto
-Configure miss: /usr/share/gocode/src/github.com/containerd/containerd/api/types/task/task.proto
-Configure miss: /usr/share/gocode/src/github.com/gogo/protobuf/gogoproto/gogo.proto
+Configure miss: /github.com/containerd/containerd/api/services/containers/v1/containers.proto
+Configure miss: /github.com/containerd/containerd/api/services/tasks/v1/tasks.proto
+Configure miss: /github.com/containerd/containerd/api/types/descriptor.proto
+Configure miss: /github.com/containerd/containerd/api/types/metrics.proto
+Configure miss: /github.com/containerd/containerd/api/types/mount.proto
+Configure miss: /github.com/containerd/containerd/api/types/task/task.proto
+Configure miss: /github.com/gogo/protobuf/gogoproto/gogo.proto
 Configure miss: g++ option to enable C++11 features
 Configure miss: grpc++ >= 1.3.2 (via pkg-config)
 Configure miss: grpc++/grpc++.h
-Configure miss: grpc_cpp_plugin
 Configure miss: mscgen
-Configure miss: protobuf >= 3.0.0 (via pkg-config)
 Configure miss: sys/inttypes.h
 Configure miss: syslimits.h
 Configure miss: x86_64-generic-linux-gnu-file

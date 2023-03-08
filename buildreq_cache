@@ -1,2 +1,4 @@
-12.1.5
+12.2.0
 curl-dev
+protobuf-dev
+valgrind
