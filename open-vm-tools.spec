@@ -4,7 +4,7 @@
 #
 Name     : open-vm-tools
 Version  : 12.2.0
-Release  : 43
+Release  : 44
 URL      : https://github.com/vmware/open-vm-tools/releases/download/stable-12.2.0/open-vm-tools-12.2.0-21223074.tar.gz
 Source0  : https://github.com/vmware/open-vm-tools/releases/download/stable-12.2.0/open-vm-tools-12.2.0-21223074.tar.gz
 Source1  : open-vm-tools.service
@@ -152,6 +152,7 @@ license components for the open-vm-tools package.
 %package services
 Summary: services components for the open-vm-tools package.
 Group: Systemd services
+Requires: /usr/bin/modprobe
 
 %description services
 services components for the open-vm-tools package.
@@ -177,7 +178,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1678292223
+export SOURCE_DATE_EPOCH=1678293240
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
@@ -204,7 +205,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1678292223
+export SOURCE_DATE_EPOCH=1678293240
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/open-vm-tools
 cp %{_builddir}/open-vm-tools-%{version}-21223074/COPYING %{buildroot}/usr/share/package-licenses/open-vm-tools/70e5b527a568a6a75b977976e2d392fadf9bd84a || :
