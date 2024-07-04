@@ -9,7 +9,7 @@ libDeployPkg.so.0:ExtractCabPackage
 libDeployPkg.so.0:ForkExecAndWaitCommand
 libDeployPkg.so.0:GetCustomScript
 libDeployPkg.so.0:GetLinuxCabErrorMsg
-libDeployPkg.so.0:IsCloudInitEnabled
+libDeployPkg.so.0:IsCloudInitCustomizationEnabled
 libDeployPkg.so.0:MspackWrapper_SetLogger
 libDeployPkg.so.0:Panic
 libDeployPkg.so.0:Process_Create
@@ -176,6 +176,7 @@ libguestStoreClient.so.0:Hostinfo_NumCPUs
 libguestStoreClient.so.0:Hostinfo_OSVersion
 libguestStoreClient.so.0:Hostinfo_OSVersionString
 libguestStoreClient.so.0:Hostinfo_QueryProcessExistence
+libguestStoreClient.so.0:Hostinfo_QueryProcessReaped
 libguestStoreClient.so.0:Hostinfo_QueryProcessSnapshot
 libguestStoreClient.so.0:Hostinfo_ReleaseProcessSnapshot
 libguestStoreClient.so.0:Hostinfo_ResetProcessState
@@ -625,6 +626,7 @@ libguestlib.so.0:Hostinfo_NumCPUs
 libguestlib.so.0:Hostinfo_OSVersion
 libguestlib.so.0:Hostinfo_OSVersionString
 libguestlib.so.0:Hostinfo_QueryProcessExistence
+libguestlib.so.0:Hostinfo_QueryProcessReaped
 libguestlib.so.0:Hostinfo_QueryProcessSnapshot
 libguestlib.so.0:Hostinfo_ReleaseProcessSnapshot
 libguestlib.so.0:Hostinfo_ResetProcessState
@@ -1248,6 +1250,7 @@ libvmtools.so.0:AsyncSocket_GetReceivedFd
 libvmtools.so.0:AsyncSocket_GetRemoteIPStr
 libvmtools.so.0:AsyncSocket_GetRemotePort
 libvmtools.so.0:AsyncSocket_GetRemoteVMCIAddress
+libvmtools.so.0:AsyncSocket_GetSNIHostname
 libvmtools.so.0:AsyncSocket_GetState
 libvmtools.so.0:AsyncSocket_GetWebSocketCloseStatus
 libvmtools.so.0:AsyncSocket_GetWebSocketCookie
@@ -1516,6 +1519,7 @@ libvmtools.so.0:File_DeleteDirectoryContent
 libvmtools.so.0:File_DeleteDirectoryTree
 libvmtools.so.0:File_DeleteEmptyDirectory
 libvmtools.so.0:File_DoesVolumeSupportAcls
+libvmtools.so.0:File_DoesVolumeSupportConvertBlocks
 libvmtools.so.0:File_EnsureDirectory
 libvmtools.so.0:File_EnsureDirectoryEx
 libvmtools.so.0:File_Exists
@@ -1687,6 +1691,7 @@ libvmtools.so.0:Hostinfo_NumCPUs
 libvmtools.so.0:Hostinfo_OSVersion
 libvmtools.so.0:Hostinfo_OSVersionString
 libvmtools.so.0:Hostinfo_QueryProcessExistence
+libvmtools.so.0:Hostinfo_QueryProcessReaped
 libvmtools.so.0:Hostinfo_QueryProcessSnapshot
 libvmtools.so.0:Hostinfo_ReleaseProcessSnapshot
 libvmtools.so.0:Hostinfo_ResetProcessState
