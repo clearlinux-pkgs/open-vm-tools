@@ -964,6 +964,7 @@ libguestlib.so.0:VThreadBase_IsInSignal
 libguestlib.so.0:VThreadBase_SetIsInSignal
 libguestlib.so.0:VThreadBase_SetName
 libguestlib.so.0:VThreadBase_SetNamePrefix
+libguestlib.so.0:VmCheck_GetHWVersion
 libguestlib.so.0:VmCheck_GetVersion
 libguestlib.so.0:VmCheck_IsVirtualWorld
 libguestlib.so.0:Warning
@@ -2243,6 +2244,7 @@ libvmtools.so.0:VThreadBase_IsInSignal
 libvmtools.so.0:VThreadBase_SetIsInSignal
 libvmtools.so.0:VThreadBase_SetName
 libvmtools.so.0:VThreadBase_SetNamePrefix
+libvmtools.so.0:VmCheck_GetHWVersion
 libvmtools.so.0:VmCheck_GetVersion
 libvmtools.so.0:VmCheck_IsVirtualWorld
 libvmtools.so.0:VmSync_Freeze

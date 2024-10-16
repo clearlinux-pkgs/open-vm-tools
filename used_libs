@@ -1,8 +1,10 @@
 ld-linux-x86-64.so.2
 libc.so.6
 libdrm.so.2
+libfuse3.so.3
 libgcc_s.so.1
 libglib-2.0.so.0
+libgmodule-2.0.so.0
 libgobject-2.0.so.0
 libmspack.so.0
 libtirpc.so.3
